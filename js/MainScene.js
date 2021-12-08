@@ -5,6 +5,9 @@ export default class MainScene extends Phaser.Scene {
     chooseYourDressStartImageCompleted = false;
     chooseLeftDress = false;
     chosseRightDress = false;
+    girlsDressesScaling = false;
+    dressRightRendered = false;
+
 
     guy = null;
     girl = null;
@@ -12,6 +15,10 @@ export default class MainScene extends Phaser.Scene {
     girlTextStart = null;
     chooseYourDressText = null;
     scaleGirlTextStart = 0;
+
+    dressLeft = null;
+    dressRight = null;
+
 
     constructor() {
         super('MainScene');
@@ -29,12 +36,19 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('choose-your-dress-text', 'assets/choose-your-dress-text.png');
         this.load.image('dress-left', 'assets/dress-left.png');
         this.load.image('dress-right', 'assets/dress-right.png');
+        this.load.image('hand-hint-pointer', 'assets/hand-hint-pointer.png');
+
+        this.load.image('dress-left-dressed', 'assets/dress-left-dressed.png');
+        this.load.image('dress-right-dressed', 'assets/dress-right-dressed.png');
+        this.load.image('choose-your-bag', 'assets/choose-your-bag.png');
+        this.load.image('progress-bar-start', 'assets/progress-bar-start.png');
     }
 
     create() {
         this.add.image(300, 450, 'background-intro');
         this.darkbg = this.add.image(300, 450, 'dark-background');
-
+        // Phaser.Display.Align.In.TopCenter(block, pic);
+        // Phaser.Display.Align.In.Center('ackground-intro', this.add.zone(400, 300, 800, 600));
         this.guy = this.add.image(300, 450, 'guy-base');
         this.guyTextStart = this.add.image(300, 450, 'start-text-guy').setScale(0.1);
 
@@ -46,7 +60,7 @@ export default class MainScene extends Phaser.Scene {
 
 
         }, 1000);
-
+        // this.input.setDefaultCursor('url(assets/hand-hint-pointer.png), pointer');
 
     }
 
@@ -64,35 +78,54 @@ export default class MainScene extends Phaser.Scene {
         }
         if (this.girlRenderCompleted && this.girlTextStart.scale < 1) {
             this.girlTextStart.scale += 0.01;
+
             if (this.girlTextStart.scale > 0.99) {
                 this.girl.destroy();
                 this.girlTextStart.destroy();
                 this.darkbg.destroy();
+                this.girlsDressesScaling = true;
                 this.chooseYourDressText = this.add.image(300, 31, 'choose-your-dress-text');
                 this.add.image(300, 450, 'choose-your-dress');
-                this.add.image(165, 703, 'dress-left').setScale(0.5);
-                this.add.image(435, 703, 'dress-right').setScale(0.5);
+                this.dressLeft = this.add.image(165, 703, 'dress-left').setScale(0.1)
+                    .setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
 
+                this.dressLeft.on('pointerdown', function () {
+                    //do things on click
+                    console.log('AAAAA');
+                });
+
+
+
+                // this.add.image(435, 703, 'dress-right').setScale(0.5);
+                // this.add.image(300, 450, 'dress-right-dressed');
             }
+
 
         }
 
+        if (this.girlsDressesScaling) {
+
+            if (this.dressLeft.scale >= 0.5) {
+                this.girlsDressesScaling = false;
+                this.dressRight = this.add.image(435, 703, 'dress-right').
+                    setScale(0.1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+                this.dressRight.on('pointerdown', function () {
+                    //do things on click
+                    console.log('bbbbb');
+                });
+                this.dressRightRendered = true;
+            }
+            else {
+                this.dressLeft.scale += 0.1;
+            }
+        }
+        if (this.dressRightRendered && this.dressRight.scale < 0.5) {
 
 
-        // if (this.scaleGirlTextStart = 1) {
-        //     this.girl.destroy();
-        //     this.girlTextStart.destroy();
-        //     this.chooseYourDressText = this.add.image(300, 31, 'choose-your-dress-text');
-        //     this.add.image(300, 450, 'choose-your-dress');
+            this.dressRight.scale += 0.1;
 
-        // }
-
-        // if (this.girlRenderCompleted && !this.chooseYourDressStartImageCompleted) {
-        //     this.girl.destroy();
-        //     this.girlTextStart.destroy();
-        //     // this.chooseYourDressStartImageCompleted
-
-        // }
+        }
+        else { this.dressRightRendered = false }
 
 
 
