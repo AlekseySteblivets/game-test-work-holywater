@@ -91,9 +91,10 @@ export default class MainScene extends Phaser.Scene {
 
                 this.dressLeft.on('pointerdown', function () {
                     //do things on click
+                    // this.add.image(300, 400, 'dress-left-dressed');
+                    // this.chooseYourDressText.destroy();
                     console.log('AAAAA');
                 });
-
 
 
                 // this.add.image(435, 703, 'dress-right').setScale(0.5);
@@ -103,6 +104,7 @@ export default class MainScene extends Phaser.Scene {
 
         }
 
+        //============================ появление платьев на выбор=================================================//       
         if (this.girlsDressesScaling) {
 
             if (this.dressLeft.scale >= 0.5) {
@@ -127,6 +129,7 @@ export default class MainScene extends Phaser.Scene {
         }
         else { this.dressRightRendered = false }
 
+        //==========================================нажатие на выбранное платье===============================
 
 
     }
