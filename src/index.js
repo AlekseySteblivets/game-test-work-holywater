@@ -16,7 +16,7 @@ import dressLeftDressedImg from './assets/dress-left-dressed.png';
 import dressRightDressedImg from './assets/dress-right-dressed.png';
 import chooseYourBagImg from './assets/choose-your-bag.png';
 import progressBarStartImg from './assets/progress-bar-start.png';
-// import { Toast } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+import { Toast } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
 import progressBarFierstImg from './assets/progress-bar-fierst.png';
 import rightDressLeftBagImg from './assets/right-dress-left-bag.png';
 import rightDressRightBagImg from './assets/right-dress-right-bag.png';
@@ -57,6 +57,12 @@ export default class MainScene extends Phaser.Scene {
 
     // ====выбор сумок====
     chooseYourBagRender = false;
+    bagLeft = null;
+    bagRight = null;
+
+
+
+    //  =======выбор аксесуаров========
 
 
     constructor() {
@@ -100,8 +106,7 @@ export default class MainScene extends Phaser.Scene {
     create() {
         this.add.image(300, 450, 'background-intro');
         this.darkbg = this.add.image(300, 450, 'dark-background');
-        // Phaser.Display.Align.In.TopCenter(block, pic);
-        // Phaser.Display.Align.In.Center('ackground-intro', this.add.zone(400, 300, 800, 600));
+
         this.guy = this.add.image(300, 450, 'guy-base');
         this.guyTextStart = this.add.image(300, 450, 'start-text-guy').setScale(0.1);
 
@@ -235,6 +240,17 @@ export default class MainScene extends Phaser.Scene {
             else {
                 this.dressRightDressed.destroy();
             }
+            // this.showToast();
+            this.bagLeft = this.add.image(165, 703, 'left-bag').setScale(0.5).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+            this.bagRight = this.add.image(435, 703, 'right-bag').setScale(0.5).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+            this.bagRight.on('pointerdown', () => {
+                // this.add.image(300, 400, 'right-dress-right-bag');
+                console.log('ccc');
+            });
+            this.bagLeft.on('pointerdown', () => {
+                // this.add.image(300, 400, 'right-dress-right-bag');
+                console.log('ddd');
+            });
 
         }
 
@@ -244,19 +260,19 @@ export default class MainScene extends Phaser.Scene {
     //     let config = {
     //         x: 400,
     //         y: 300,
-    //         text: this.add.text(0, 0, '', {
-    //             fontSize: '24px'
-    //         }),
-    //         space: {
-    //             left: 20,
-    //             right: 20,
-    //             top: 20,
-    //             bottom: 20,
+    //         image1: this.add.image(165, 703, 'left-bag').setScale(0.5),
+    //         image2: this.add.image(435, 703, 'right-bag').setScale(0.5),
+    //         duration: {
+    //             in: 200,
+    //             hold: 200,
+    //             out: 200,
     //         },
+    //         transitIn: 'popUp',
+    //         transitOut: 1,
     //     };
 
     //     let toast = new Toast(this, config);
-    //     toast.showMessage('Hello world');
+    //     // toast.showMessage('Hello world');
     //     // .showMessage('Phaser 3 is good')
     //     // .showMessage('See you next time');
     // }
