@@ -1,122 +1,49 @@
-# game-test-work-holywater
+# Phaser 3 Webpack Project Template
 
-написание игры на Phaser
+A Phaser 3 project template with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/) that includes hot-reloading for development and production-ready builds.
 
-My Fantasy: Make Your Story
-GDD TZ
+This has been updated for Phaser 3.50.0 version and above.
 
-Стак технологий:
+Loading images via JavaScript module `import` is also supported, although not recommended.
 
-- You must use ​Phaser3 framework​ for UI
-- UI must be adaptable for mobile
-- (Extra) Adaptable for playable ads format will be a plus
+## Requirements
 
-Посилання до App Store:
-https://apps.apple.com/us/app/id1491717191
+[Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
 
-Опис:
-Гра основана на геймплеї My Fantasy: Make Your Story і використовує механіку вибору опцій.
+## Available Commands
 
-Екрани:
-Інтро (анімація);
-Туторіал (оверлей);
-Геймплей (екран 1);
-Геймплей (екран 2);
-Геймплей (екран 3);
-Емейзінг скрін (анімація);
-Луз скрін (анімація);
-Енд карта.
+| Command | Description |
+|---------|-------------|
+| `npm install` | Install project dependencies |
+| `npm start` | Build project and open web server running project |
+| `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
 
-Вимоги:
-Довжина по часу: не менше 7 секунд від першого тапу.
-Довжина по тапах: не менше 4х тапів.
-Орієнтація екрану: горизонтальна \ вертикальна.
+## Writing Code
 
-Інтро:
+After cloning the repo, run `npm install` from your project directory. Then, you can start the local development server by running `npm start`.
 
-Програється швидка діалогова анімація в який на темному оверлеї з’являються іконка жіночого персонажа з текстовим блоком.
-Текстовий блок: “I received an invitation to the party!”
-Програється анімація здивування.
-Текстовий блок: “I need to prepare my appearance”.
-Програється анімація радості і знаходження ідеї.
+After starting the development server with `npm start`, you can edit any files in the `src` folder and webpack will automatically recompile and reload your server (available at `http://localhost:8080` by default).
 
-Довжина по часу: 1, 5 секунд.
+## Customizing the Template
 
-Туторіал:
+### Babel
 
-З'являється головний екран гри з темним оверлеєм.
-Без темного оверлея з’являється жіночий персонаж.
-Над темним оверлеєм з’являється текстовий блок: “Choose your appearance”.
-Без темного оверлея: іконка опції вибору 1 (плаття 1) та іконка опції вибору 2 (костюм 2).
-Над темним оверлеєм з’являється хінт поінтер, який почергово вказує на іконку опції вибору 1 (плаття 1) та на іконку опції вибору 2 (костюм 2).
-Якщо гравець тапає на будь-яку іконку опції вибору - то чорний оверлей; хінт поінтер та текстовий блок зникають. Іконки опції вибору змінюються на іконку опції вибору 1 (аксесуар 1) та на іконку опції вибору 2 (аксесуар 2).
-Починається основний геймплей.
+You can write modern ES6+ JavaScript and Babel will transpile it to a version of JavaScript that you want your project to support. The targeted browsers are set in the `.babelrc` file and the default currently targets all browsers with total usage over "0.25%" but excludes IE11 and Opera Mini.
 
-Основний геймплей:
+ ```
+"browsers": [
+  ">0.25%",
+  "not ie 11",
+  "not op_mini all"
+]
+ ```
 
-Гравець почергово вибирає з 2х опіцій вибору декоративні елементи. Ці елементи відображаються з анімацією на персонажу після вибру гравця. Після відображення іконки опції вибору змінюються на наступні.
-Ігровий прогрес відображається на прогрес барі. Прогрес бар має 4 ділення.
+### Webpack
 
-Екран 1: гравець обирає аксесуари 1-2;
-Екран 2: гравець обирає аксесуари 3-4;
-Екран 2: гравець обирає мейкап 1-2.
+If you want to customize your build, such as adding a new webpack loader or plugin (i.e. for loading CSS or fonts), you can modify the `webpack/base.js` file for cross-project changes, or you can modify and/or create new configuration files and target them in specific npm tasks inside of `package.json'.
 
-При кожному виборі гравця програється анімація радості персонажа.
+## Deploying Code
 
-Якщо гравець не обирає з опції вибору після 2х секунд з’являється хінт поінтер, що почергово показує на опції вибору.
+After you run the `npm run build` command, your code will be built into a single bundle located at `dist/bundle.min.js` along with any other assets you project depended. 
 
-Після останнього вибору гравцю демонструється Емейзінг Скрін (анімація) або Луз Скрін;
-В цій анімації жіночий персонаж зі результатом виборів зустрічається разом з чоловічим персонажем на вечірці в клубі.
-Чоловічий персонаж в кежуал костюмі.
-В залежності від початкового вибору гравця гра демонструє або Емейзінг Скрін з Енд картою або Луз Скрін.
-
-Емейзінг скрін (залежить від модифікації):
-Якщо вибране плаття 1.
-Компоненти:
-Жіночий персонаж;
-Чоловічий персонаж з текстовим блоком “You are beautiful!”
-Анімація радості жіночого персонажа;
-Бекграунд;
-Партікли.
-
-Луз Скрін:
-Якщо вибраний костюм 2.
-Компоненти:
-Жіночий персонаж;
-Чоловічий персонаж з текстовим блоком “What a weird appearance!”
-Анімація суму жіночого персонажа;
-Бекграунд;
-
-Після анімації з’являється чорний оверлей.
-Певерх оверлею анімована кнопка ретраю.
-Текстовий блок “Retry!”
-
-Нотаток: Будь який тап на Ретрай Скріні відправляє гравця в магазин.
-
-Енд карта:
-
-Компоненти:
-Текстовий блок: “ Swipe to play!”;
-Бекграунд;
-Анімовані стрілки що показують свайп рух.
-
-Нотаток: Будь який тап чи свайп на Енд карті відправляє гравця в магазин.
-
-Нотаток: SQ - Super Quick - перехід в магазин на певному тапі (взаємодії) з грою без анімацій чи Енд карти.
-Нотаток: Повна гра - це повний геймплей з Позитивним підтвердженням та Енд картою.
-
-Модифікації:
-
-Повна гра з інтро
-
-Матеріали:
-
-https://www.figma.com/file/yDojHDNdQde7hqAFBEdxEa/playable-ads_for-TZ?node-id=275%3A47
-
-PSD characters:
-
-https://drive.google.com/drive/folders/1EEmFwitMcX0_GhpwX7_PDwxR-t7o_NLg?usp=sharing
-
-Рефенс:
-
-https://drive.google.com/drive/folders/1tDhhBHh6bSwOfvlwl6IoK5FQv8La28aN?usp=sharing
+If you put the contents of the `dist` folder in a publicly-accessible location (say something like `http://mycoolserver.com`), you should be able to open `http://mycoolserver.com/index.html` and play your game.
