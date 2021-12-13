@@ -24,10 +24,11 @@ import leftDressRightBagImg from './assets/left-dress-right-bag.png';
 import leftDressLeftBagImg from './assets/left-dress-left-bag.png'
 import leftBagImg from './assets/left-bag.png';
 import rightBagImg from './assets/right-bag.png';
+// =============== выбор аксессуаров======================
 import chooseYourAccessoryTextImg from './assets/choose-your-accessory-text.png';
-
-
-
+import progressBarSecondImg from './assets/progress-bar-fierst.png';
+import accessLeft from './assets/access-left.png';
+import accessRight from './assets/access-right.png';
 
 export default class MainScene extends Phaser.Scene {
 
@@ -57,13 +58,19 @@ export default class MainScene extends Phaser.Scene {
 
     // ====выбор сумок====
     chooseYourBagRender = false;
+    chooseYourBagText = null;
     bagLeft = null;
     bagRight = null;
-
-
+    leftDressRightBagImg = null;
+    rightDressRightBagImg = null;
+    leftDressLeftBagImg = null;
+    rightDressLeftBagImg = null;
+    progressBarSecond = null;
 
     //  =======выбор аксесуаров========
-
+    chooseYourAccessory = false;
+    accessRight = null;
+    accessLeft = null;
 
     constructor() {
         super('MainScene');
@@ -99,6 +106,14 @@ export default class MainScene extends Phaser.Scene {
 
         // ===================выбор аксесуаров===================
         this.load.image('choose-your-accessory-text', chooseYourAccessoryTextImg);
+        this.load.image('progress-bar-second', progressBarSecondImg);
+        this.load.image('access-left', accessLeft);
+        this.load.image('access-right', accessRight);
+
+
+
+
+
 
 
     }
@@ -230,29 +245,60 @@ export default class MainScene extends Phaser.Scene {
         // =========================================================выбор сумок ========================================================
 
         if (this.chooseYourBagRender) {
+            this.chooseYourBagRender = false;
             this.progressBar.destroy();
-            this.add.image(300, 31, 'choose-your-bag');
+            this.chooseYourBagText = this.add.image(300, 31, 'choose-your-bag');
             this.dressLeft.destroy();
             this.dressRight.destroy();
+            this.bagLeft = this.add.image(165, 703, 'left-bag').setScale(0.5).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+            this.bagRight = this.add.image(435, 703, 'right-bag').setScale(0.5).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
             if (this.dressRightDressed.visible) {
                 this.dressLeftDressed.destroy();
+
             }
             else {
                 this.dressRightDressed.destroy();
             }
-            // this.showToast();
-            this.bagLeft = this.add.image(165, 703, 'left-bag').setScale(0.5).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
-            this.bagRight = this.add.image(435, 703, 'right-bag').setScale(0.5).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+
+
             this.bagRight.on('pointerdown', () => {
-                // this.add.image(300, 400, 'right-dress-right-bag');
+                this.dressLeftDressed.visible ?
+                    this.leftDressRightBagImg = this.add.image(300, 465, 'left-dress-right-bag') :
+                    this.rightDressRightBagImg = this.add.image(300, 465, 'right-dress-right-bag');
+                this.chooseYourBagText.destroy();
+                this.progressBarSecond = this.add.image(300, 31, 'progress-bar-second');
+                setTimeout(() => {
+                    this.chooseYourAccessory = true;
+                }, 500)
                 console.log('ccc');
             });
             this.bagLeft.on('pointerdown', () => {
-                // this.add.image(300, 400, 'right-dress-right-bag');
+                this.dressRightDressed.visible ?
+                    this.rightDressLeftBagImg = this.add.image(300, 465, 'right-dress-left-bag') :
+                    this.leftDressLeftBagImg = this.add.image(300, 465, 'left-dress-left-bag');
+                this.chooseYourBagText.destroy();
+                this.progressBarSecond = this.add.image(300, 31, 'progress-bar-second');
+                setTimeout(() => {
+                    this.chooseYourAccessory = true;
+                }, 500)
                 console.log('ddd');
             });
 
         }
+
+        // =======================================выбор аксессуаров=========================================
+        // if (this.chooseYourAccessory) {
+        //     this.progressBarSecond.destroy();
+        //     this.chooseYourBagText.destroy();
+        //     this.bagLeft.destroy();
+        //     this.bagRight.destroy();
+
+        //     // this.chooseYourBagText = this.add.image(300, 31, 'choose-your-bag');
+        //     // this.dressLeft.destroy();
+        //     // this.dressRight.destroy();
+        //     // this.bagLeft = this.add.image(165, 703, 'left-bag').setScale(0.5).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+        //     // this.bagRight = this.add.image(435, 703, 'right-bag').setScale(0.5).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+        // }
 
     }
 
