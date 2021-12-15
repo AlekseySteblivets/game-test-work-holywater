@@ -46,9 +46,16 @@ import chooseYourPlaceImg from './assets/choose-your-place.png';
 import leftPlaseImg from './assets/left-place.png';
 import rightPlaseImg from './assets/right-plase.png';
 
+// ============================финальная сцена=====================================
+import finalBgLeftImg from './assets/final-scene/final-bg-left.png';
+import finalBgRightImg from './assets/final-scene/final-bg-right.png';
+import guyFinalScene from './assets/final-scene/guy-final-scene.png';
+
+
 
 export default class MainScene extends Phaser.Scene {
 
+    backgrImg = null;
     guyRenderCompleted = false;
     girlRenderCompleted = false;
     chooseYourDressStartImageCompleted = false;
@@ -105,6 +112,11 @@ export default class MainScene extends Phaser.Scene {
     chooseYourPlaceImg = null;
     leftPlaseImg = null;
     rightPlaseImg = null;
+    // =======================финальная сцена ========================
+    finalScene = false;
+    finalBgLeftImg = null;
+    finalBgRightImg = null;
+    guyFinalScene = null;
 
     constructor() {
         super('MainScene');
@@ -159,10 +171,15 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('choose-your-place', chooseYourPlaceImg);
         this.load.image('left-place', leftPlaseImg);
         this.load.image('right-plase', rightPlaseImg);
+
+        // =================================финальная сцена ===========================================
+        this.load.image('final-bg-left', finalBgLeftImg);
+        this.load.image('final-bg-right', finalBgRightImg);
+        this.load.image('guy-final-scene', guyFinalScene);
     }
 
     create() {
-        this.add.image(300, 450, 'background-intro');
+        this.backgrImg = this.add.image(300, 450, 'background-intro');
         this.darkbg = this.add.image(300, 450, 'dark-background');
 
         this.guy = this.add.image(300, 450, 'guy-base');
@@ -402,8 +419,114 @@ export default class MainScene extends Phaser.Scene {
             this.leftPlaseImg = this.add.image(165, 703, 'left-place').setScale(1).setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
             this.rightPlaseImg = this.add.image(435, 703, 'right-plase').setScale(1).setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
 
+            this.leftPlaseImg.on('pointerdown', () => {
+                this.backgrImg.destroy();
+                this.finalBgLeftImg = this.add.image(300, 450, 'final-bg-left');
+                this.guyFinalScene = this.add.image(349, 450, 'guy-final-scene');
+                if (this.leftDressLeftBagLeftAccImg) {
+                    this.leftDressLeftBagLeftAccImg.setDepth(1);
+                    // this.leftDressLeftBagLeftAccImg.destroy();
+                }
+                if (this.leftDressRightBagLeftAccImg) {
+                 this.leftDressRightBagLeftAccImg.setDepth(1)
+                    // this.leftDressRightBagLeftAccImg.destroy();
+                }
+                if (this.rightDressLeftBagLeftAccImg) {
+                    this.rightDressLeftBagLeftAccImg.setDepth(1);
+                    // this.rightDressLeftBagLeftAccImg.destroy();
+                }
+                if (this.rightDressRightBagLeftAccImg) {
+                 this.rightDressRightBagLeftAccImg.setDepth(1)
+                    // this.rightDressRightBagLeftAccImg.destroy();
+                }
 
+                if (this.leftDressLeftBagRightAccImg) {
+                    this.leftDressLeftBagRightAccImg.setDepth(1);
+            
+                    // this.leftDressLeftBagRightAccImg.destroy();
+                }
+                if (this.leftDressRightBagRightAccImg) {
+                    this.leftDressRightBagRightAccImg.setDepth(1);
+                    // this.leftDressRightBagRightAccImg.destroy();
+                }
+
+                if (this.rightDressLeftBagRightAccImg) {
+                    this.rightDressLeftBagRightAccImg.setDepth(1);
+                    // this.rightDressLeftBagRightAccImg.destroy();
+                }
+                if (this.rightDressRightBagRightAccImg) {
+                  
+                    this.rightDressRightBagRightAccImg.setDepth(1);
+           
+                    // this.rightDressRightBagRightAccImg.destroy();
+                }
+                
+                console.log('this.leftPlaseImg.on');
+                this.chooseYourPlaceImg.destroy();
+               
+                setTimeout(() => {
+
+                    this.finalScene = true;
+                }, 500)
+            });
+
+
+                this.rightPlaseImg.on('pointerdown', () => {
+                    this.backgrImg.destroy();
+                    this.finalBgRightImg = this.add.image(300, 450, 'final-bg-right');
+                    this.guyFinalScene = this.add.image(349, 450, 'guy-final-scene');
+                if (this.leftDressLeftBagLeftAccImg) {
+                    this.leftDressLeftBagLeftAccImg.setDepth(1);
+                    // this.leftDressLeftBagLeftAccImg.destroy();
+                }
+                if (this.leftDressRightBagLeftAccImg) {
+                this.leftDressRightBagLeftAccImg.setDepth(1)
+                    // this.leftDressRightBagLeftAccImg.destroy();
+                }
+                if (this.rightDressLeftBagLeftAccImg) {
+                    this.rightDressLeftBagLeftAccImg.setDepth(1);
+                    // this.rightDressLeftBagLeftAccImg.destroy();
+                }
+                if (this.rightDressRightBagLeftAccImg) {
+                    this.rightDressRightBagLeftAccImg.setDepth(1);
+                    // this.rightDressRightBagLeftAccImg.destroy();
+                }
+
+                if (this.leftDressLeftBagRightAccImg) {
+                    this.leftDressLeftBagRightAccImg.setDepth(1);
+                    // this.leftDressLeftBagRightAccImg.destroy();
+                }
+                if (this.leftDressRightBagRightAccImg) {
+                    this.leftDressRightBagRightAccImg.setDepth(1);
+                    // this.leftDressRightBagRightAccImg.destroy();
+                }
+
+                    if (this.rightDressLeftBagRightAccImg) {
+                        this.rightDressLeftBagRightAccImg.setDepth(1);
+                    // this.rightDressLeftBagRightAccImg.destroy();
+                }
+                    if (this.rightDressRightBagRightAccImg) {
+                        this.rightDressRightBagRightAccImg.setDepth(1);
+                    // this.rightDressRightBagRightAccImg.destroy();
+                }
+                
+                console.log('this.leftPlaseImg.on');
+                this.chooseYourPlaceImg.destroy();
+               
+                setTimeout(() => {
+
+                    this.finalScene = true;
+                }, 500)
+            });
         }
+
+// =================================================финальная сцена=====================================================
+            if (this.finalScene) {
+                console.log('this.finalScene');
+                this.finalScene = false;
+                this.leftPlaseImg.destroy();
+                this.rightPlaseImg.destroy();
+            }
 
     }
 
