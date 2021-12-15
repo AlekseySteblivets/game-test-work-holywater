@@ -1,5 +1,8 @@
 import Phaser from 'phaser';
 import logoImg from './assets/logo.png';
+import { Toast } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+import { Sizer } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+import { Buttons } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
 
 import darkBackgroundImg from './assets/dark-background.png';
 import guyBaseImg from './assets/guy-base.png';
@@ -16,7 +19,6 @@ import dressLeftDressedImg from './assets/dress-left-dressed.png';
 import dressRightDressedImg from './assets/dress-right-dressed.png';
 import chooseYourBagImg from './assets/choose-your-bag.png';
 import progressBarStartImg from './assets/progress-bar-start.png';
-import { Toast } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
 import progressBarFierstImg from './assets/progress-bar-fierst.png';
 import rightDressLeftBagImg from './assets/right-dress-left-bag.png';
 import rightDressRightBagImg from './assets/right-dress-right-bag.png';
@@ -50,7 +52,8 @@ import rightPlaseImg from './assets/right-plase.png';
 import finalBgLeftImg from './assets/final-scene/final-bg-left.png';
 import finalBgRightImg from './assets/final-scene/final-bg-right.png';
 import guyFinalScene from './assets/final-scene/guy-final-scene.png';
-
+import guyFinalSceneText from './assets/final-scene/guy-final-scene-text.png';
+import buttonPlayImg from './assets/final-scene/button-play.png';
 
 
 export default class MainScene extends Phaser.Scene {
@@ -117,6 +120,9 @@ export default class MainScene extends Phaser.Scene {
     finalBgLeftImg = null;
     finalBgRightImg = null;
     guyFinalScene = null;
+    guyFinalSceneText = null;
+    buttonPlayImg = null;
+    toAppStore = false;
 
     constructor() {
         super('MainScene');
@@ -176,6 +182,8 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('final-bg-left', finalBgLeftImg);
         this.load.image('final-bg-right', finalBgRightImg);
         this.load.image('guy-final-scene', guyFinalScene);
+        this.load.image('guy-final-scene-text', guyFinalSceneText);
+        this.load.image('button-play', buttonPlayImg);
     }
 
     create() {
@@ -424,46 +432,46 @@ export default class MainScene extends Phaser.Scene {
                 this.finalBgLeftImg = this.add.image(300, 450, 'final-bg-left');
                 this.guyFinalScene = this.add.image(349, 450, 'guy-final-scene');
                 if (this.leftDressLeftBagLeftAccImg) {
-                    this.leftDressLeftBagLeftAccImg.setDepth(1);
+                    this.leftDressLeftBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.leftDressLeftBagLeftAccImg.destroy();
                 }
                 if (this.leftDressRightBagLeftAccImg) {
-                 this.leftDressRightBagLeftAccImg.setDepth(1)
+                    this.leftDressRightBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.leftDressRightBagLeftAccImg.destroy();
                 }
                 if (this.rightDressLeftBagLeftAccImg) {
-                    this.rightDressLeftBagLeftAccImg.setDepth(1);
+                    this.rightDressLeftBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.rightDressLeftBagLeftAccImg.destroy();
                 }
                 if (this.rightDressRightBagLeftAccImg) {
-                 this.rightDressRightBagLeftAccImg.setDepth(1)
+                    this.rightDressRightBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5)
                     // this.rightDressRightBagLeftAccImg.destroy();
                 }
 
                 if (this.leftDressLeftBagRightAccImg) {
-                    this.leftDressLeftBagRightAccImg.setDepth(1);
-            
+                    this.leftDressLeftBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
+
                     // this.leftDressLeftBagRightAccImg.destroy();
                 }
                 if (this.leftDressRightBagRightAccImg) {
-                    this.leftDressRightBagRightAccImg.setDepth(1);
+                    this.leftDressRightBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.leftDressRightBagRightAccImg.destroy();
                 }
 
                 if (this.rightDressLeftBagRightAccImg) {
-                    this.rightDressLeftBagRightAccImg.setDepth(1);
+                    this.rightDressLeftBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.rightDressLeftBagRightAccImg.destroy();
                 }
                 if (this.rightDressRightBagRightAccImg) {
-                  
-                    this.rightDressRightBagRightAccImg.setDepth(1);
-           
+
+                    this.rightDressRightBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
+
                     // this.rightDressRightBagRightAccImg.destroy();
                 }
-                
+
                 console.log('this.leftPlaseImg.on');
                 this.chooseYourPlaceImg.destroy();
-               
+
                 setTimeout(() => {
 
                     this.finalScene = true;
@@ -471,48 +479,49 @@ export default class MainScene extends Phaser.Scene {
             });
 
 
-                this.rightPlaseImg.on('pointerdown', () => {
-                    this.backgrImg.destroy();
-                    this.finalBgRightImg = this.add.image(300, 450, 'final-bg-right');
-                    this.guyFinalScene = this.add.image(349, 450, 'guy-final-scene');
+            this.rightPlaseImg.on('pointerdown', () => {
+                this.backgrImg.destroy();
+                this.finalBgRightImg = this.add.image(300, 450, 'final-bg-right');
+                this.guyFinalScene = this.add.image(349, 450, 'guy-final-scene');
+
                 if (this.leftDressLeftBagLeftAccImg) {
-                    this.leftDressLeftBagLeftAccImg.setDepth(1);
+                    this.leftDressLeftBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.leftDressLeftBagLeftAccImg.destroy();
                 }
                 if (this.leftDressRightBagLeftAccImg) {
-                this.leftDressRightBagLeftAccImg.setDepth(1)
+                    this.leftDressRightBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5)
                     // this.leftDressRightBagLeftAccImg.destroy();
                 }
                 if (this.rightDressLeftBagLeftAccImg) {
-                    this.rightDressLeftBagLeftAccImg.setDepth(1);
+                    this.rightDressLeftBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.rightDressLeftBagLeftAccImg.destroy();
                 }
                 if (this.rightDressRightBagLeftAccImg) {
-                    this.rightDressRightBagLeftAccImg.setDepth(1);
+                    this.rightDressRightBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.rightDressRightBagLeftAccImg.destroy();
                 }
 
                 if (this.leftDressLeftBagRightAccImg) {
-                    this.leftDressLeftBagRightAccImg.setDepth(1);
+                    this.leftDressLeftBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.leftDressLeftBagRightAccImg.destroy();
                 }
                 if (this.leftDressRightBagRightAccImg) {
-                    this.leftDressRightBagRightAccImg.setDepth(1);
+                    this.leftDressRightBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.leftDressRightBagRightAccImg.destroy();
                 }
 
-                    if (this.rightDressLeftBagRightAccImg) {
-                        this.rightDressLeftBagRightAccImg.setDepth(1);
+                if (this.rightDressLeftBagRightAccImg) {
+                    this.rightDressLeftBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.rightDressLeftBagRightAccImg.destroy();
                 }
-                    if (this.rightDressRightBagRightAccImg) {
-                        this.rightDressRightBagRightAccImg.setDepth(1);
+                if (this.rightDressRightBagRightAccImg) {
+                    this.rightDressRightBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
                     // this.rightDressRightBagRightAccImg.destroy();
                 }
-                
+
                 console.log('this.leftPlaseImg.on');
                 this.chooseYourPlaceImg.destroy();
-               
+
                 setTimeout(() => {
 
                     this.finalScene = true;
@@ -520,18 +529,57 @@ export default class MainScene extends Phaser.Scene {
             });
         }
 
-// =================================================финальная сцена=====================================================
-            if (this.finalScene) {
-                console.log('this.finalScene');
-                this.finalScene = false;
-                this.leftPlaseImg.destroy();
-                this.rightPlaseImg.destroy();
-            }
+        // =================================================финальная сцена=====================================================
+        if (this.finalScene) {
+            console.log('this.finalScene');
+            this.finalScene = false;
+            this.leftPlaseImg.destroy();
+            this.rightPlaseImg.destroy();
+            this.guyFinalSceneText = this.add.image(300, 400, 'guy-final-scene-text').setScale(1).setDepth(1);
+            setTimeout(() => { this.toAppStore = true }, 1500)
+            // this.toAppStore = true;
+
+            // if (this.guyFinalSceneText.scale <= 1) {
+            //     this.guyFinalSceneText += 0.01
+            // }
+
+        }
+        if (this.toAppStore) {
+            console.log('this.toAppStore');
+            this.toAppStore = false;
+            this.buttonPlayImg = this.add.image(300, 795, 'button-play').setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' })
+
+            this.guyFinalSceneText.destroy();
+
+            this.buttonPlayImg.on('pointerdown', () => {
+                var url = 'https://apps.apple.com/us/app/id1491717191';
+
+                var s = window.open(url, '_blank');
+
+                if (s && s.focus) {
+                    s.focus();
+                }
+                else if (!s) {
+                    window.location.href = url;
+                }
+            });
+
+        }
 
     }
 
 
 
+    // var sizer = scene.rexUI.add.sizer(x, y, width, height, {
+    //     orientation: 0,
+    //     // rtl: false,
+    //     // anchor: undefined,
+    //     // space: { left: 0, right:0, top:0, bottom:0, item:0 },
+
+    //     // name: '',
+    //     // draggable: false,
+    //     // sizerEvents: false,
+    // });
 
 
 
