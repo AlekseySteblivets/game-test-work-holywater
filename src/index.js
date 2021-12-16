@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
-import logoImg from './assets/logo.png';
-import { Toast } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
-import { Sizer } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
-import { Buttons } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+// import logoImg from './assets/logo.png';
+// import { Toast } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+// import { Sizer } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+// import { Buttons } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
 
 import darkBackgroundImg from './assets/dark-background.png';
 import guyBaseImg from './assets/guy-base.png';
@@ -201,7 +201,6 @@ export default class MainScene extends Phaser.Scene {
 
 
         }, 1000);
-        // this.input.setDefaultCursor('url(assets/hand-hint-pointer.png), pointer');
 
     }
 
@@ -218,12 +217,10 @@ export default class MainScene extends Phaser.Scene {
             this.girl = this.add.image(300, 450, 'girl');
             this.girlRenderCompleted = true;
             this.girlTextStart = this.add.image(300, 400, 'start-text-girl').setScale(0.6);
-            // this.showToast();
         }
 
         if (this.girlRenderCompleted && this.girlTextStart.scale < 1) {
             this.girlTextStart.scale += 0.01;
-            // girlRenderCompleted = false;
             console.log('this.girlRenderCompleted && this.girlTextStart.scale < 1');
 
             if (this.girlTextStart.scale >= 1) {
@@ -246,10 +243,8 @@ export default class MainScene extends Phaser.Scene {
                     this.darkbg.destroy();
                     this.dressLeftDressed.visible = true;
                     this.dressRightDressed.visible = false;
-                    // var visible = gameObject.visible; // visible: true/false
                     this.chooseYourDressGirl.destroy();
-                    this.chooseYourDressText.destroy();
-                    // this.dressRightDressed.destroy();
+                    this.chooseYourDressText.destroy();;
                     this.progressBar = this.add.image(300, 31, 'progress-bar-fierst');
                     console.log(222);
                     setTimeout(() => { this.chooseYourBagRender = true }, 500)
@@ -271,21 +266,16 @@ export default class MainScene extends Phaser.Scene {
                     setScale(0.1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
                 this.dressRight.on('pointerdown', () => {
                     this.darkbg.destroy();
-
-                    // this.dressLeftDressed = this.add.image(300, 400, 'dress-left-dressed');
                     this.dressRightDressed.visible = true;
                     this.dressLeftDressed.visible = false;
-                    // var visible = gameObject.visible; // visible: true/false
                     this.chooseYourDressGirl.destroy();
                     this.chooseYourDressText.destroy();
-                    // this.dressLeftDressed.destroy();
                     this.progressBar = this.add.image(300, 31, 'progress-bar-fierst');
                     console.log(223);
                     setTimeout(() => {
                         this.chooseYourBagRender = true;
                         console.log('dressRight', 123);
                     }, 500)
-                    //do things on click
                     console.log('bbbbb');
                 });
                 this.dressRightRendered = true;
@@ -298,12 +288,8 @@ export default class MainScene extends Phaser.Scene {
 
         if (this.dressRightRendered && this.dressRight.scale < 0.5) {
             console.log('this.dressRight.scale < 0.5');
-
             this.dressRight.scale += 0.1;
-
         }
-        // else { this.dressRightRendered = false }
-
 
         // =========================================================выбор сумок ========================================================
 
@@ -433,40 +419,29 @@ export default class MainScene extends Phaser.Scene {
                 this.guyFinalScene = this.add.image(349, 450, 'guy-final-scene');
                 if (this.leftDressLeftBagLeftAccImg) {
                     this.leftDressLeftBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5);
-                    // this.leftDressLeftBagLeftAccImg.destroy();
                 }
                 if (this.leftDressRightBagLeftAccImg) {
                     this.leftDressRightBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5);
-                    // this.leftDressRightBagLeftAccImg.destroy();
                 }
                 if (this.rightDressLeftBagLeftAccImg) {
                     this.rightDressLeftBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5);
-                    // this.rightDressLeftBagLeftAccImg.destroy();
                 }
                 if (this.rightDressRightBagLeftAccImg) {
                     this.rightDressRightBagLeftAccImg.setDepth(1).setOrigin(0.8, 0.5)
-                    // this.rightDressRightBagLeftAccImg.destroy();
                 }
 
                 if (this.leftDressLeftBagRightAccImg) {
                     this.leftDressLeftBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
-
-                    // this.leftDressLeftBagRightAccImg.destroy();
                 }
                 if (this.leftDressRightBagRightAccImg) {
                     this.leftDressRightBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
-                    // this.leftDressRightBagRightAccImg.destroy();
                 }
 
                 if (this.rightDressLeftBagRightAccImg) {
                     this.rightDressLeftBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
-                    // this.rightDressLeftBagRightAccImg.destroy();
                 }
                 if (this.rightDressRightBagRightAccImg) {
-
                     this.rightDressRightBagRightAccImg.setDepth(1).setOrigin(0.8, 0.5);
-
-                    // this.rightDressRightBagRightAccImg.destroy();
                 }
 
                 console.log('this.leftPlaseImg.on');
@@ -537,12 +512,6 @@ export default class MainScene extends Phaser.Scene {
             this.rightPlaseImg.destroy();
             this.guyFinalSceneText = this.add.image(300, 400, 'guy-final-scene-text').setScale(1).setDepth(1);
             setTimeout(() => { this.toAppStore = true }, 1500)
-            // this.toAppStore = true;
-
-            // if (this.guyFinalSceneText.scale <= 1) {
-            //     this.guyFinalSceneText += 0.01
-            // }
-
         }
         if (this.toAppStore) {
             console.log('this.toAppStore');
@@ -568,47 +537,7 @@ export default class MainScene extends Phaser.Scene {
 
     }
 
-
-
-    // var sizer = scene.rexUI.add.sizer(x, y, width, height, {
-    //     orientation: 0,
-    //     // rtl: false,
-    //     // anchor: undefined,
-    //     // space: { left: 0, right:0, top:0, bottom:0, item:0 },
-
-    //     // name: '',
-    //     // draggable: false,
-    //     // sizerEvents: false,
-    // });
-
-
-
-    // showToast() {
-    //     let config = {
-    //         x: 400,
-    //         y: 300,
-    //         image1: this.add.image(165, 703, 'left-bag').setScale(0.5),
-    //         image2: this.add.image(435, 703, 'right-bag').setScale(0.5),
-    //         duration: {
-    //             in: 200,
-    //             hold: 200,
-    //             out: 200,
-    //         },
-    //         transitIn: 'popUp',
-    //         transitOut: 1,
-    //     };
-
-    //     let toast = new Toast(this, config);
-    //     // toast.showMessage('Hello world');
-    //     // .showMessage('Phaser 3 is good')
-    //     // .showMessage('See you next time');
-    // }
 }
-
-
-// this.fplayer = player;
-//this.fplayer.x += 1;
-// player.setVelocityX(-160);
 
 const config = {
     width: 600,
