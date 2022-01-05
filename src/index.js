@@ -14,7 +14,7 @@ import chooseYourDressImg from './assets/choose-your-dress.png';
 import chooseYourDressTextImg from './assets/choose-your-dress-text.png';
 import dressLeftImg from './assets/dress-left.png';
 import dressRightImg from './assets/dress-right.png';
-import handHintPointerImg from './assets/hand-hint-pointer.png';
+import handHintPointerImg from './assets/hand-cursor.png';
 import dressLeftDressedImg from './assets/dress-left-dressed.png';
 import dressRightDressedImg from './assets/dress-right-dressed.png';
 import chooseYourBagImg from './assets/choose-your-bag.png';
@@ -26,6 +26,7 @@ import leftDressRightBagImg from './assets/left-dress-right-bag.png';
 import leftDressLeftBagImg from './assets/left-dress-left-bag.png'
 import leftBagImg from './assets/left-bag.png';
 import rightBagImg from './assets/right-bag.png';
+import lefBagNewView from './assets/lef-bag-new-view.png';
 // =============== выбор аксессуаров======================
 import chooseYourAccessoryTextImg from './assets/choose-your-accessory-text.png';
 import progressBarSecondImg from './assets/progress-bar-second.png';
@@ -133,7 +134,7 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('dark-background', darkBackgroundImg);
         this.load.image('guy-base', guyBaseImg);
         this.load.image('background-intro', backgroundIntroImg);
-        this.load.image('start-text-guy', startTextGuyImg);
+        this.load.image("start-text-guy", startTextGuyImg);
         this.load.image('girl', girlImg);
         this.load.image('start-text-girl', startTextGirlImg);
         this.load.image('choose-your-dress', chooseYourDressImg);
@@ -157,6 +158,8 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('left-dress-left-bag', leftDressLeftBagImg);
         this.load.image('left-bag', leftBagImg);
         this.load.image('right-bag', rightBagImg);
+
+        this.load.image('lef-bag-new-view', lefBagNewView);
 
         // ===================выбор аксесуаров===================
         this.load.image('choose-your-accessory-text', chooseYourAccessoryTextImg);
@@ -192,15 +195,8 @@ export default class MainScene extends Phaser.Scene {
 
         this.guy = this.add.image(300, 450, 'guy-base');
         this.guyTextStart = this.add.image(300, 450, 'start-text-guy').setScale(0.1);
-
-        setTimeout(() => {
-            this.guyRenderCompleted = true;
-        }, 750);
-        setTimeout(() => {
-            this.girlRenderCompleted = true;
-
-
-        }, 1000);
+        this.time.delayedCall(750, () => this.guyRenderCompleted = true, [], this);
+        this.time.delayedCall(1000, () => this.girlRenderCompleted = true, [], this);
 
     }
 
@@ -236,7 +232,8 @@ export default class MainScene extends Phaser.Scene {
                 this.dressRightDressed = this.add.image(300, 465, 'dress-right-dressed');
                 this.dressRightDressed.visible = false;
                 this.dressLeft = this.add.image(165, 703, 'dress-left').setScale(0.1)
-                    .setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+                    .setInteractive({ cursor: 'url(src/assets/qwe.cur), pointer' });
+
 
 
                 this.dressLeft.on('pointerdown', () => {
@@ -247,7 +244,7 @@ export default class MainScene extends Phaser.Scene {
                     this.chooseYourDressText.destroy();;
                     this.progressBar = this.add.image(300, 31, 'progress-bar-fierst');
                     console.log(222);
-                    setTimeout(() => { this.chooseYourBagRender = true }, 500)
+                    this.time.delayedCall(500, () => this.chooseYourBagRender = true, [], this);
 
                     console.log('AAAAA');
                 });
@@ -263,7 +260,7 @@ export default class MainScene extends Phaser.Scene {
             if (this.dressLeft.scale >= 0.5) {
                 this.girlsDressesScaling = false;
                 this.dressRight = this.add.image(435, 703, 'dress-right').
-                    setScale(0.1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+                    setScale(0.1).setInteractive({ cursor: 'url(src/assets/qwe.cur), pointer' });
                 this.dressRight.on('pointerdown', () => {
                     this.darkbg.destroy();
                     this.dressRightDressed.visible = true;
@@ -272,10 +269,7 @@ export default class MainScene extends Phaser.Scene {
                     this.chooseYourDressText.destroy();
                     this.progressBar = this.add.image(300, 31, 'progress-bar-fierst');
                     console.log(223);
-                    setTimeout(() => {
-                        this.chooseYourBagRender = true;
-                        console.log('dressRight', 123);
-                    }, 500)
+                    this.time.delayedCall(500, () => this.chooseYourBagRender = true, [], this);
                     console.log('bbbbb');
                 });
                 this.dressRightRendered = true;
@@ -293,6 +287,7 @@ export default class MainScene extends Phaser.Scene {
 
         // =========================================================выбор сумок ========================================================
 
+
         if (this.chooseYourBagRender) {
             console.log('this.chooseYourBagRender');
             this.chooseYourBagRender = false;
@@ -300,8 +295,8 @@ export default class MainScene extends Phaser.Scene {
             this.chooseYourBagText = this.add.image(300, 31, 'choose-your-bag');
             this.dressLeft.destroy();
             this.dressRight.destroy();
-            this.bagLeft = this.add.image(165, 703, 'left-bag').setScale(0.5).setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
-            this.bagRight = this.add.image(435, 703, 'right-bag').setScale(0.5).setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+            this.bagLeft = this.add.image(165, 703, 'left-bag').setScale(0.5).setDepth(1).setInteractive({ cursor: 'url(src/assets/hand-cursor.png), pointer' });
+            this.bagRight = this.add.image(435, 703, 'right-bag').setScale(0.5).setDepth(1).setInteractive({ cursor: 'url(src/assets/hand-cursor.png), pointer' });
             if (this.dressRightDressed.visible) {
                 this.dressLeftDressed.destroy();
 
@@ -317,20 +312,22 @@ export default class MainScene extends Phaser.Scene {
                     this.rightDressRightBagImg = this.add.image(300, 465, 'right-dress-right-bag');
                 this.chooseYourBagText.destroy();
                 this.progressBarSecond = this.add.image(300, 31, 'progress-bar-second');
-                setTimeout(() => {
-                    this.chooseYourAccessory = true;
-                }, 500)
+                this.time.delayedCall(500, () => this.chooseYourAccessory = true, [], this);
                 console.log('ccc');
             });
             this.bagLeft.on('pointerdown', () => {
-                this.dressRightDressed.visible ?
-                    this.rightDressLeftBagImg = this.add.image(300, 465, 'right-dress-left-bag') :
+                if (this.dressRightDressed.visible) {
+                    this.rightDressLeftBagImg = this.add.image(270, 380, 'lef-bag-new-view').setScale(1.75);
+                    this.rightDressLeftBagImg.rotation -= 0.18;
+                    // this.rightDressLeftBagImg.setBlendMode(Phaser.BlendModes.SOURCE_OUT);
+                }
+                else {
                     this.leftDressLeftBagImg = this.add.image(300, 465, 'left-dress-left-bag');
+                }
+
                 this.chooseYourBagText.destroy();
                 this.progressBarSecond = this.add.image(300, 31, 'progress-bar-second');
-                setTimeout(() => {
-                    this.chooseYourAccessory = true;
-                }, 500)
+                this.time.delayedCall(500, () => this.chooseYourAccessory = true, [], this);
                 console.log('ddd');
             });
 
@@ -345,8 +342,8 @@ export default class MainScene extends Phaser.Scene {
             this.bagLeft.destroy();
             this.bagRight.destroy();
             this.chooseYourAccessoryText = this.add.image(300, 31, 'choose-your-accessory-text');
-            this.accessLeft = this.add.image(165, 703, 'access-left').setScale(1).setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
-            this.accessRight = this.add.image(435, 703, 'access-right').setScale(1).setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+            this.accessLeft = this.add.image(165, 703, 'access-left').setScale(1).setDepth(1).setInteractive({ cursor: 'url(src/assets/hand-cursor.png), pointer' });
+            this.accessRight = this.add.image(435, 703, 'access-right').setScale(1).setDepth(1).setInteractive({ cursor: 'url(src/assets/hand-cursor.png), pointer' });
 
             this.accessLeft.on('pointerdown', () => {
                 if (this.leftDressLeftBagImg) {
@@ -368,10 +365,7 @@ export default class MainScene extends Phaser.Scene {
                 console.log('this.accessLeft.on');
                 this.chooseYourAccessoryText.destroy();
                 this.progressBarThierdImg = this.add.image(300, 31, 'progress-bar-thierd');
-                setTimeout(() => {
-
-                    this.chooseYourPlace = true;
-                }, 500)
+                this.time.delayedCall(500, () => this.chooseYourPlace = true, [], this);
             });
 
             this.accessRight.on('pointerdown', () => {
@@ -394,10 +388,7 @@ export default class MainScene extends Phaser.Scene {
                 }
                 this.chooseYourAccessoryText.destroy();
                 this.progressBarThierdImg = this.add.image(300, 31, 'progress-bar-thierd');
-                setTimeout(() => {
-
-                    this.chooseYourPlace = true;
-                }, 500)
+                this.time.delayedCall(500, () => this.chooseYourPlace = true, [], this);
             });
 
         }
@@ -410,8 +401,8 @@ export default class MainScene extends Phaser.Scene {
             this.accessLeft.destroy();
             this.accessRight.destroy();
             this.chooseYourPlaceImg = this.add.image(300, 31, 'choose-your-place');
-            this.leftPlaseImg = this.add.image(165, 703, 'left-place').setScale(1).setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
-            this.rightPlaseImg = this.add.image(435, 703, 'right-plase').setScale(1).setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' });
+            this.leftPlaseImg = this.add.image(165, 703, 'left-place').setScale(1).setDepth(1).setInteractive({ cursor: 'url(src/assets/hand-cursor.png), pointer' });
+            this.rightPlaseImg = this.add.image(435, 703, 'right-plase').setScale(1).setDepth(1).setInteractive({ cursor: 'url(src/assets/hand-cursor.png), pointer' });
 
             this.leftPlaseImg.on('pointerdown', () => {
                 this.backgrImg.destroy();
@@ -446,11 +437,7 @@ export default class MainScene extends Phaser.Scene {
 
                 console.log('this.leftPlaseImg.on');
                 this.chooseYourPlaceImg.destroy();
-
-                setTimeout(() => {
-
-                    this.finalScene = true;
-                }, 500)
+                this.time.delayedCall(500, () => this.finalScene = true, [], this);
             });
 
 
@@ -496,11 +483,7 @@ export default class MainScene extends Phaser.Scene {
 
                 console.log('this.leftPlaseImg.on');
                 this.chooseYourPlaceImg.destroy();
-
-                setTimeout(() => {
-
-                    this.finalScene = true;
-                }, 500)
+                this.time.delayedCall(500, () => this.finalScene = true, [], this);
             });
         }
 
@@ -511,12 +494,12 @@ export default class MainScene extends Phaser.Scene {
             this.leftPlaseImg.destroy();
             this.rightPlaseImg.destroy();
             this.guyFinalSceneText = this.add.image(300, 400, 'guy-final-scene-text').setScale(1).setDepth(1);
-            setTimeout(() => { this.toAppStore = true }, 1500)
+            this.time.delayedCall(1500, () => this.toAppStore = true, [], this);
         }
         if (this.toAppStore) {
             console.log('this.toAppStore');
             this.toAppStore = false;
-            this.buttonPlayImg = this.add.image(300, 795, 'button-play').setDepth(1).setInteractive({ cursor: 'url(assets/hand-hint-pointer.png), pointer' })
+            this.buttonPlayImg = this.add.image(300, 795, 'button-play').setDepth(1).setInteractive({ cursor: 'url(src/assets/hand-cursor.png), pointer' })
 
             this.guyFinalSceneText.destroy();
 
@@ -539,9 +522,18 @@ export default class MainScene extends Phaser.Scene {
 
 }
 
+
+
 const config = {
+    type: Phaser.AUTO,
     width: 600,
     height: 900,
+    parent: 'phaser-game',
+    backgroundColor: "black",
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -549,9 +541,7 @@ const config = {
             debug: false
         }
     },
-    backgroundColor: '#345678',
-    type: Phaser.AUTO,
-    parent: 'phaser-game',
+
     scene: [MainScene]
 }
 
